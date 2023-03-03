@@ -1,0 +1,60 @@
+public String parse(String input) {
+		System.out.println("              IN Parse   		 ");
+		
+		input+="$";
+		int inPos=0;	
+		
+		String finalOutput="";
+		String output="";
+		String output2="";
+		
+		Stack<String> stack=new Stack<String>();
+		stack.push("$");
+		stack.push("S");
+
+		while(!stack.isEmpty()) {
+			System.out.println("begin stack: "+stack);
+			System.out.println("input.charAt(inPos): "+input.charAt(inPos));
+			
+			String A = stack.peek();
+			String r =Character.toString(input.charAt(inPos));
+			
+			if(stack.peek().equals(Character.toString(input.charAt(inPos)))) {
+				System.out.println("stack.peek() "+stack.peek());
+				output+=stack.peek();
+				stack.pop();
+				inPos++;
+			}else {
+//				System.out.println("stack.pop() "+stack.peek());
+//				System.out.println("input.charAt(inPos) "+input.charAt(inPos));
+				
+			Key k = new Key(stack.pop(),input.charAt(inPos)+"");
+			String value=multiKeyMap.get(k);
+			System.out.println("value "+value);
+			if (value==null) {
+					System.out.println("ERRPRR");
+//					System.out.println("OUTPUT:  "+output+stackPrint(stack));
+//				output2=stackPrint(stack);
+//					System.out.println("OUTPUT:  "+output+output2);
+
+				return "ERroOr";
+			}
+			//HANDLE value = null before here 
+			for (int j = value.length()-1; j >= 0; j--) {
+//				System.out.println("value "+value.charAt(j));
+				stack.push(value.charAt(j)+"");
+
+			}
+
+			
+			
+			
+			}
+//			stack.pop();//temp just to avoid infinite loop 4 now
+			System.out.println("final stack: "+stack);
+
+			System.out.println("   OUTPUT:  "+output+output2);
+		} 
+
+		return null;
+	}
